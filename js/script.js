@@ -1,0 +1,92 @@
+document.addEventListener('DOMContentLoaded',()=>{
+  document.body.classList.add('locked');
+  const intro=document.getElementById('intro');
+  const envelope=document.getElementById('open-invitation');
+  const musicButton=document.getElementById('music-toggle');
+  let audioCtx,master,playing=false,timer;
+
+  function tone(frequency,when,duration,volume=.09,type='triangle'){
+    if(!audioCtx)return;
+    const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
+    osc.type=type;osc.frequency.value=frequency;
+    gain.gain.setValueAtTime(0,when);gain.gain.linearRampToValueAtTime(volume,when+.06);
+    gain.gain.exponentialRampToValueAtTime(.0001,when+duration);
+    osc.connect(gain);gain.connect(master);osc.start(when);osc.stop(when+duration+.1);
+  }
+  function playPhrase(){
+    if(!playing)return;
+    const notes=[392,493.88,587.33,493.88,440,523.25,659.25,587.33];
+    const now=audioCtx.currentTime+.05;
+    notes.forEach((n,i)=>{
+      tone(n,now+i*.72,1.5,.105,'triangle');
+      tone(n*2,now+i*.72,1.1,.025,'sine');
+      if(i%2===0)tone(n/2,now+i*.72,2.2,.045,'triangle');
+    });
+    timer=setTimeout(playPhrase,6200);
+  }
+  function startMusic(){
+    if(!audioCtx){
+      audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+      master=audioCtx.createGain();
+      const limiter=audioCtx.createDynamicsCompressor();
+      limiter.threshold.value=-12;limiter.knee.value=8;limiter.ratio.value=8;
+      limiter.attack.value=.003;limiter.release.value=.2;
+      master.gain.value=1.35;master.connect(limiter);limiter.connect(audioCtx.destination);
+    }
+    audioCtx.resume();playing=true;musicButton.classList.remove('paused');playPhrase();
+  }
+  function stopMusic(){playing=false;clearTimeout(timer);if(audioCtx)audioCtx.suspend();musicButton.classList.add('paused')}
+
+  envelope.addEventListener('click',()=>{
+    envelope.classList.add('open');startMusic();
+    setTimeout(()=>{intro.classList.add('hidden');document.body.classList.remove('locked');document.querySelector('.hero .reveal').classList.add('visible')},1000);
+  },{once:true});
+  musicButton.addEventListener('click',()=>playing?stopMusic():startMusic());
+
+  const target=new Date(CONFIG.fechaEvento).getTime();
+  function countdown(){
+    const diff=target-Date.now(),box=document.getElementById('countdown');
+    if(diff<=0){box.innerHTML='<p class="time">¡Hoy comienza la magia!</p>';return}
+    const values=[Math.floor(diff/86400000),Math.floor(diff/3600000)%24,Math.floor(diff/60000)%60,Math.floor(diff/1000)%60];
+    ['cd-dias','cd-horas','cd-min','cd-seg'].forEach((id,i)=>document.getElementById(id).textContent=String(values[i]).padStart(2,'0'));
+  }
+  countdown();setInterval(countdown,1000);
+
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.18});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  const lanterns=document.getElementById('lanterns');
+  for(let i=0;i<13;i++){
+    const el=document.createElement('i');el.className='lantern';el.style.left=`${5+Math.random()*90}%`;el.style.animationDuration=`${11+Math.random()*12}s`;el.style.animationDelay=`-${Math.random()*18}s`;el.style.opacity=.35+Math.random()*.5;lanterns.appendChild(el);
+  }
+
+  // Destellos que siguen suavemente el cursor
+  const cursor=document.getElementById('magic-cursor');
+  if(window.matchMedia('(pointer:fine)').matches){
+    window.addEventListener('pointermove',e=>{
+      cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';cursor.style.opacity='.9';
+    });
+    document.addEventListener('mouseleave',()=>cursor.style.opacity='0');
+
+    // Profundidad sutil en las tarjetas
+    document.querySelectorAll('.tilt-card').forEach(card=>{
+      card.addEventListener('pointermove',e=>{
+        const r=card.getBoundingClientRect();
+        const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+        card.style.transform=`perspective(800px) rotateX(${-y*5}deg) rotateY(${x*6}deg) translateY(-4px)`;
+      });
+      card.addEventListener('pointerleave',()=>card.style.transform='');
+    });
+  }
+
+  // Movimiento de profundidad al recorrer la portada
+  let ticking=false;
+  window.addEventListener('scroll',()=>{
+    if(ticking)return;ticking=true;
+    requestAnimationFrame(()=>{
+      const y=Math.min(window.scrollY,window.innerHeight);
+      document.querySelector('.hero-content').style.transform=`translateY(${y*.12}px)`;
+      document.querySelector('.golden-ribbon').style.transform=`translateY(${y*.06}px)`;
+      ticking=false;
+    });
+  },{passive:true});
+});

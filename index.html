@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#24122f">
+  <meta name="description" content="Invitación a una noche mágica de XV años — 29 de agosto de 2026">
+  <title>Una noche mágica · Mis XV años</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="magic-cursor" id="magic-cursor" aria-hidden="true"></div>
+  <div class="intro" id="intro">
+    <div class="intro-stars" aria-hidden="true"></div>
+    <p class="intro-kicker">Érase una vez…</p>
+    <button class="envelope" id="open-invitation" aria-label="Abrir invitación">
+      <span class="envelope-back"></span>
+      <span class="envelope-letter"><small>Una invitación</small><strong>muy especial</strong></span>
+      <span class="envelope-front"></span>
+      <span class="envelope-flap"></span>
+      <span class="wax-seal">XV</span>
+    </button>
+    <p class="intro-hint">Toca para descubrir la magia</p>
+  </div>
+
+  <button class="music" id="music-toggle" aria-label="Pausar música" title="Música ambiental">
+    <span class="music-on">♫</span><span class="music-off">♪</span>
+  </button>
+
+  <main>
+    <section class="hero" aria-label="Invitación principal">
+      <div class="hero-art" aria-hidden="true"></div>
+      <div class="aurora" aria-hidden="true"></div>
+      <svg class="golden-ribbon" viewBox="0 0 500 1000" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M430,-40 C120,140 460,260 150,420 C-30,520 380,650 90,850 C10,910 40,990 170,1040" />
+      </svg>
+      <div class="lanterns" id="lanterns" aria-hidden="true"></div>
+      <div class="hero-content reveal">
+        <p class="overline">Una noche mágica está por comenzar</p>
+        <p class="script">Mis</p>
+        <h1>XV Años</h1>
+        <div class="gold-flourish"><span>✦</span></div>
+        <p class="hero-copy">Hay momentos en la vida que imaginamos,<br>soñamos y esperamos.<br><em>Quiero compartir el mío contigo.</em></p>
+        <a class="scroll-cue" href="#fecha" aria-label="Ver los detalles"><span></span>Descubre la invitación</a>
+      </div>
+    </section>
+
+    <section class="date-section" id="fecha">
+      <div class="sun-emblem" aria-hidden="true"><span>✦</span></div>
+      <div class="section-inner reveal">
+        <div class="royal-scroll">
+          <div class="scroll-roll top"></div>
+          <div class="sun-stamp" aria-hidden="true">☀</div>
+          <p class="overline dark">Guarda esta fecha</p>
+          <div class="date-lockup" aria-label="29 de agosto de 2026">
+            <div><span>Sábado</span><strong>29</strong></div>
+            <i></i>
+            <div><span>Agosto</span><strong>2026</strong></div>
+          </div>
+          <p class="time">A las <strong>6:00</strong> de la tarde</p>
+          <p class="magic-note"><span>✦</span> Tan solo faltan… <span>✦</span></p>
+          <div class="countdown" id="countdown" aria-label="Cuenta regresiva">
+            <div><strong id="cd-dias">00</strong><span>Días</span></div>
+            <div><strong id="cd-horas">00</strong><span>Horas</span></div>
+            <div><strong id="cd-min">00</strong><span>Minutos</span></div>
+            <div><strong id="cd-seg">00</strong><span>Segundos</span></div>
+          </div>
+          <div class="scroll-roll bottom"></div>
+        </div>
+      </div>
+      <div class="boat-scene" aria-hidden="true">
+        <div class="boat-lantern"></div><div class="person person-one"></div><div class="person person-two"></div>
+        <div class="boat-body"></div><div class="water-ripple one"></div><div class="water-ripple two"></div>
+      </div>
+    </section>
+
+    <section class="details-section">
+      <div class="climbing-vine vine-left" aria-hidden="true"><i>❀</i><i>❁</i><i>✿</i></div>
+      <div class="climbing-vine vine-right" aria-hidden="true"><i>✿</i><i>❀</i><i>❁</i></div>
+      <div class="section-inner reveal">
+        <p class="overline">Nuestro destino</p>
+        <h2>Donde comienza<br><span>la aventura</span></h2>
+        <div class="location-card tilt-card">
+          <div class="tower-icon" aria-hidden="true">♜</div>
+          <p class="label">Lugar</p>
+          <h3>Aitabu Hotel</h3>
+          <p>Vereda La Poyata</p>
+          <a class="button" href="https://www.google.com/maps/search/?api=1&query=Aitabu+Hotel+Vereda+La+Poyata" target="_blank" rel="noopener">Ver ubicación <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="etiquette-section">
+      <div class="section-inner reveal">
+        <p class="overline dark">Detalles especiales</p>
+        <div class="detail-grid">
+          <article class="tilt-card">
+            <div class="card-sparkles" aria-hidden="true"><i>✦</i><i>✧</i><i>✦</i></div>
+            <div class="line-icon">♕</div>
+            <p class="label">Código de vestimenta</p>
+            <h3>Elegante</h3>
+            <p>Prepárate para una noche<br>de cuento de hadas.</p>
+          </article>
+          <article class="tilt-card">
+            <div class="envelope-magic" aria-hidden="true"><i>♥</i><i>✦</i><i>♥</i></div>
+            <div class="line-icon">✉</div>
+            <p class="label">Regalo</p>
+            <h3>Lluvia de sobres</h3>
+            <p>Tu presencia es mi mejor regalo,<br>pero si deseas tener un detalle…</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing-section">
+      <div class="closing-glow" aria-hidden="true"></div>
+      <div class="closing-lanterns" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="section-inner reveal">
+        <p class="quote">“Y en ese momento,<br>todo se volvió mágico.”</p>
+        <div class="gold-flourish"><span>✦</span></div>
+        <p class="closing-copy">Te espero para escribir juntos<br>este capítulo inolvidable.</p>
+        <p class="signature">Con cariño</p>
+        <p class="xv-mark">XV</p>
+      </div>
+    </section>
+  </main>
+  <script src="config.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
