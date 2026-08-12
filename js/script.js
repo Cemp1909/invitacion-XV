@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('[data-birthday-name]').forEach(element=>element.textContent=CONFIG.nombre);
+  document.title=`Mis XV Años · ${CONFIG.nombre}`;
   document.body.classList.add('locked');
   const intro=document.getElementById('intro');
   const envelope=document.getElementById('open-invitation');
