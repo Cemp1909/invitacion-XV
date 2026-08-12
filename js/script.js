@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded',()=>{
       `📱 *WhatsApp:* ${data.get('telefono')}`,
       `🧒 *¿Es menor de edad?:* ${data.get('menor')}`,
       `🎉 *Asistencia:* ${data.get('asistencia')}`,
-      `👥 *Acompañante(s):* ${data.get('acompanantes')||'Ninguno'}`,
       '',
       '29 de agosto de 2026 · 6:00 p. m.',
       'Aitabu Hotel · Vereda La Poyata'
