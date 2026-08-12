@@ -52,6 +52,28 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
   countdown();setInterval(countdown,1000);
 
+  // Confirmación: organiza las respuestas y las envía por WhatsApp
+  const rsvpForm=document.getElementById('rsvp-form');
+  rsvpForm.addEventListener('submit',event=>{
+    event.preventDefault();
+    if(!rsvpForm.reportValidity())return;
+    const data=new FormData(rsvpForm);
+    const message=[
+      '✨ *CONFIRMACIÓN XV AÑOS* ✨',
+      '',
+      `👤 *Nombre:* ${data.get('nombre')}`,
+      `📱 *WhatsApp:* ${data.get('telefono')}`,
+      `🧒 *¿Es menor de edad?:* ${data.get('menor')}`,
+      `🎉 *Asistencia:* ${data.get('asistencia')}`,
+      `👥 *Acompañante(s):* ${data.get('acompanantes')||'Ninguno'}`,
+      '',
+      '29 de agosto de 2026 · 6:00 p. m.',
+      'Aitabu Hotel · Vereda La Poyata'
+    ].join('\n');
+    const url=`https://wa.me/${CONFIG.whatsappConfirmacion}?text=${encodeURIComponent(message)}`;
+    window.open(url,'_blank','noopener,noreferrer');
+  });
+
   const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.18});
   document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
   const lanterns=document.getElementById('lanterns');

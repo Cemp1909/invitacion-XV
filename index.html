@@ -115,6 +115,42 @@
       </div>
     </section>
 
+    <section class="rsvp-section" id="confirmar">
+      <div class="rsvp-lanterns" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="section-inner reveal">
+        <p class="overline">Confirma tu asistencia</p>
+        <h2>¿Serás parte de<br><span>esta aventura?</span></h2>
+        <p class="rsvp-intro">Completa tus datos y envía tu respuesta directamente por WhatsApp.</p>
+        <form class="rsvp-form" id="rsvp-form">
+          <label>Nombre completo <b>*</b>
+            <input type="text" id="guest-name" name="nombre" autocomplete="name" required placeholder="Escribe tu nombre">
+          </label>
+          <label>WhatsApp <b>*</b>
+            <input type="tel" id="guest-phone" name="telefono" autocomplete="tel" required inputmode="tel" placeholder="Tu número de contacto">
+          </label>
+          <fieldset>
+            <legend>¿Eres menor de edad? <b>*</b></legend>
+            <div class="choice-row">
+              <label class="choice"><input type="radio" name="menor" value="Sí" required><span>Sí</span></label>
+              <label class="choice"><input type="radio" name="menor" value="No"><span>No</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>¿Asistirás a la fiesta? <b>*</b></legend>
+            <div class="choice-row">
+              <label class="choice"><input type="radio" name="asistencia" value="Sí, con gusto" required><span>¡Sí, con gusto!</span></label>
+              <label class="choice"><input type="radio" name="asistencia" value="No podré ir"><span>No podré ir</span></label>
+            </div>
+          </fieldset>
+          <label>Acompañante(s)
+            <input type="text" id="companions" name="acompanantes" placeholder="Nombres de tus acompañantes">
+          </label>
+          <button class="whatsapp-button" type="submit"><span>✦</span> Enviar confirmación por WhatsApp</button>
+          <p class="form-note">Al tocar el botón se abrirá WhatsApp con tus respuestas.</p>
+        </form>
+      </div>
+    </section>
+
     <section class="closing-section">
       <div class="closing-glow" aria-hidden="true"></div>
       <div class="closing-lanterns" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
