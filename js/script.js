@@ -7,24 +7,38 @@ document.addEventListener('DOMContentLoaded',()=>{
   const musicButton=document.getElementById('music-toggle');
   let audioCtx,master,playing=false,timer;
 
-  function tone(frequency,when,duration,volume=.09,type='triangle'){
+  function tone(frequency,when,duration,volume=.09,type='sine',attack=.04){
     if(!audioCtx)return;
     const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
     osc.type=type;osc.frequency.value=frequency;
-    gain.gain.setValueAtTime(0,when);gain.gain.linearRampToValueAtTime(volume,when+.06);
+    gain.gain.setValueAtTime(.0001,when);gain.gain.exponentialRampToValueAtTime(volume,when+attack);
     gain.gain.exponentialRampToValueAtTime(.0001,when+duration);
     osc.connect(gain);gain.connect(master);osc.start(when);osc.stop(when+duration+.1);
   }
+  function harp(frequency,when,volume=.075){
+    tone(frequency,when,2.4,volume,'sine',.012);
+    tone(frequency*2,when,1.25,volume*.22,'sine',.008);
+    tone(frequency*3,when,0.8,volume*.08,'sine',.006);
+  }
+  function warmChord(notes,when,duration=5){
+    notes.forEach((note,index)=>{
+      tone(note,when+index*.035,duration,.022,'sine',1.1);
+      tone(note/2,when+index*.035,duration,.012,'sine',1.3);
+    });
+  }
   function playPhrase(){
     if(!playing)return;
-    const notes=[392,493.88,587.33,493.88,440,523.25,659.25,587.33];
+    // Vals original de cuento: arpa, campanas y un fondo orquestal cálido.
     const now=audioCtx.currentTime+.05;
-    notes.forEach((n,i)=>{
-      tone(n,now+i*.72,1.5,.105,'triangle');
-      tone(n*2,now+i*.72,1.1,.025,'sine');
-      if(i%2===0)tone(n/2,now+i*.72,2.2,.045,'triangle');
+    const chords=[[261.63,329.63,392],[220,261.63,329.63],[174.61,220,261.63],[196,246.94,293.66]];
+    const melody=[659.25,587.33,523.25,493.88,523.25,659.25,783.99,659.25,587.33,523.25,493.88,440];
+    chords.forEach((chord,i)=>warmChord(chord,now+i*3,4.2));
+    melody.forEach((note,i)=>{
+      harp(note,now+i,.075);
+      if(i%3===0)harp(chords[Math.floor(i/3)][0]/2,now+i,.055);
     });
-    timer=setTimeout(playPhrase,6200);
+    [0,3,6,9].forEach((beat,i)=>tone(1046.5,now+beat,1.8,.018,'sine',.01));
+    timer=setTimeout(playPhrase,12000);
   }
   function startMusic(){
     if(!audioCtx){
@@ -33,7 +47,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       const limiter=audioCtx.createDynamicsCompressor();
       limiter.threshold.value=-12;limiter.knee.value=8;limiter.ratio.value=8;
       limiter.attack.value=.003;limiter.release.value=.2;
-      master.gain.value=1.35;master.connect(limiter);limiter.connect(audioCtx.destination);
+      master.gain.value=1.45;master.connect(limiter);limiter.connect(audioCtx.destination);
     }
     audioCtx.resume();playing=true;musicButton.classList.remove('paused');playPhrase();
   }
