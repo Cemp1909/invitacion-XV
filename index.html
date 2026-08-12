@@ -72,8 +72,31 @@
         </div>
       </div>
       <div class="boat-scene" aria-hidden="true">
-        <div class="boat-lantern"></div><div class="person person-one"></div><div class="person person-two"></div>
-        <div class="boat-body"></div><div class="water-ripple one"></div><div class="water-ripple two"></div>
+        <svg class="story-boat" viewBox="0 0 420 190" role="presentation">
+          <defs>
+            <linearGradient id="boatGold" x1="0" x2="1"><stop stop-color="#b77a2b"/><stop offset=".5" stop-color="#f0c96e"/><stop offset="1" stop-color="#8e5922"/></linearGradient>
+            <radialGradient id="lampGlow"><stop stop-color="#fff5b8"/><stop offset=".38" stop-color="#ffc857"/><stop offset="1" stop-color="#e79824"/></radialGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <g class="boat-lamp">
+            <circle cx="54" cy="61" r="25" fill="#ffc85b" opacity=".18" filter="url(#glow)"/>
+            <path d="M37 26 Q54 10 70 27 M39 27v36h30V27 M44 34h20l-3 23H47z" fill="none" stroke="#4b2857" stroke-width="5" stroke-linecap="round"/>
+            <path d="M47 36h14l-2 18H49z" fill="url(#lampGlow)"/>
+          </g>
+          <g class="boat-people" fill="#4b2857">
+            <path d="M164 105c0-29 5-48 19-57 17-11 40-1 41 20 1 10-4 18-11 24 12 10 17 25 18 43h-69z"/>
+            <circle cx="196" cy="43" r="19"/>
+            <path d="M274 105c0-29-5-48-19-57-17-11-40-1-41 20-1 10 4 18 11 24-12 10-17 25-18 43h69z"/>
+            <circle cx="242" cy="43" r="19"/>
+            <path class="long-hair" d="M256 38c25 18 31 51 18 91 36 2 54-13 47-36-6-20-30-32-49-48z"/>
+            <path d="M194 91q25 24 50 0" fill="none" stroke="#4b2857" stroke-width="12" stroke-linecap="round"/>
+          </g>
+          <path class="boat-hull" d="M24 105 Q52 147 111 158h206q55-8 79-53-65 22-177 22T24 105z" fill="#4b2857"/>
+          <path d="M58 126q159 38 303 0" fill="none" stroke="url(#boatGold)" stroke-width="5" stroke-linecap="round"/>
+          <path d="M21 105q-4-27 7-47M399 105q5-25-1-43" fill="none" stroke="#4b2857" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="89" cy="140" r="6" fill="#eac468"/><circle cx="333" cy="140" r="6" fill="#eac468"/>
+        </svg>
+        <div class="water-ripple one"></div><div class="water-ripple two"></div><div class="water-ripple three"></div>
       </div>
     </section>
 
